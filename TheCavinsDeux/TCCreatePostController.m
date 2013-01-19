@@ -6,21 +6,33 @@
 //  Copyright (c) 2013 Robert Cavin. All rights reserved.
 //
 
-#import "TCFirstViewController.h"
+#import "TCCreatePostController.h"
 #import "RCConnectionHandler.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface TCFirstViewController () {
+@interface TCCreatePostController () {
     UIImagePickerControllerSourceType _imageSource;
+    BOOL _postEdited;
+    BOOL _imageAdded;
 }
 
 @end
 
-@implementation TCFirstViewController
+@implementation TCCreatePostController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.addImageView.layer.borderWidth = 1;
+    self.addImageView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    
+    self.textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.textView.layer.borderWidth = 1;
+    self.textView.layer.cornerRadius = 10;
+    self.textView.textColor = [UIColor grayColor];
+    
+    self.postButton.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,7 +48,7 @@
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:@"Existing",@"Camera", nil];
-    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    [actionSheet showInView:self.view];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -61,23 +73,50 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSLog(@"%@",info);
     self.imageView.image = [info objectForKey:UIImagePickerControllerEditedImage];
+    _imageAdded = YES;
+    self.postButton.enabled = ([self.textView.text length] || _imageAdded);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    self.textView.text = @"";
+    self.textView.textColor = [UIColor darkTextColor];    
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if (!_postEdited) {
+        _postEdited = YES;
+        self.textView.text = @"";
+        self.textView.textColor = [UIColor darkTextColor];
+    }
+    
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
+        
+        self.postButton.enabled = ([textView.text length] || _imageAdded);
         return NO;
     }
+    
     return YES;
 }
 
 - (IBAction)pushedPostButton:(id)sender {
-    NSData* imageData = UIImageJPEGRepresentation(self.imageView.image, 1.0);
+
+    NSDictionary* args = @{};
+    NSArray* fileInfo = @[];
+    
+    if (_postEdited && [self.textView.text length] > 0)
+        args = @{@"text":self.textView.text};
+    
+    if (_imageAdded) {
+        NSData* imageData = UIImageJPEGRepresentation(self.imageView.image, 1.0);
+        fileInfo = @[@{ @"name":@"image", @"data":imageData,@"filename":@"image.jpg",@"mime-type":@"image/jpeg"},];
+    }
+    
     [RCConnectionHandler requestJSONWithEndpoint:@"stream/1/post"
                                       withMethod:@"POST"
-                                        withArgs:@{@"text":self.textView.text}
-                                       withFiles:@[@{@"name":@"image",@"data":imageData,@"filename":@"image.jpg",@"mime-type":@"image/jpeg"},]
+                                        withArgs:args
+                                       withFiles:fileInfo
                                        withOwner:self
                                         callback:^(NSHTTPURLResponse *response, id json) {
                                             UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Post Successful"
@@ -86,8 +125,13 @@
                                                                                       cancelButtonTitle:@"OK"
                                                                                       otherButtonTitles:nil];
                                             [alertView show];
+                                            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
                                         }];
     
+}
+
+- (IBAction)cancelButtonPressed:(id)sender {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "TCAppDelegate.h"
 #import "RCConnectionHandler.h"
+#import "TCStreamViewController.h"
 
 @implementation TCAppDelegate
 
@@ -45,30 +46,12 @@
                                        withFiles:nil
                                        withOwner:self
                                         callback:^(NSHTTPURLResponse *response, NSDictionary* json) {
-                                            if ([json objectForKey:@"login_required"]) [self login];
+                                            if ([json objectForKey:@"login_required"]) {
+                                                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"login_required" object:nil]];
+                                            }
                                         }];
     
 
-}
-
-- (void) login {
-    [RCConnectionHandler requestJSONWithEndpoint:@"login"
-                                      withMethod:@"POST"
-                                        withArgs:@{@"username":@"robcavin",@"password":@"nirvanastp"}
-                                       withFiles:nil
-                                       withOwner:self
-                                        callback:^(NSHTTPURLResponse *response, NSDictionary* json) {
-                                            if ([json objectForKey:@"login_required"]) {
-                                                UIAlertView* alertView =
-                                                [[UIAlertView alloc] initWithTitle:@"Login Error"
-                                                                           message:@"Login failed"
-                                                                          delegate:nil
-                                                                 cancelButtonTitle:@"OK"
-                                                                 otherButtonTitles:nil];
-                                                [alertView show];
-                                                
-                                            };
-                                        }];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

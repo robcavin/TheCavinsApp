@@ -53,13 +53,15 @@ static NSMutableDictionary* requests;
 
 + (void) addCSRFToRequest:(NSMutableURLRequest*)request {
     NSArray* cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:API_DOMAIN]];
-    NSHTTPCookie* csrfCookie = [cookies objectAtIndex:[cookies indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+    NSUInteger index = [cookies indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         if ([((NSHTTPCookie*)obj).name isEqualToString:@"csrftoken"]) {
             *stop = YES;
             return YES;
         };
         return NO;
-    }]];
+    }];
+    NSHTTPCookie* csrfCookie = nil;
+    if (index != NSNotFound) csrfCookie = [cookies objectAtIndex:index];
     [request setValue:csrfCookie.value forHTTPHeaderField:@"X-CSRFToken"];
 }
 

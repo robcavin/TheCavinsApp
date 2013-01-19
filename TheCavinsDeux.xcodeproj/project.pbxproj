@@ -18,10 +18,10 @@
 		95443F6F16A27459003568A0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95443F6E16A27459003568A0 /* Default-568h@2x.png */; };
 		95443F7216A27459003568A0 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95443F7016A27459003568A0 /* MainStoryboard_iPhone.storyboard */; };
 		95443F7516A27459003568A0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95443F7316A27459003568A0 /* MainStoryboard_iPad.storyboard */; };
-		95443F7816A27459003568A0 /* TCFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95443F7716A27459003568A0 /* TCFirstViewController.m */; };
+		95443F7816A27459003568A0 /* TCCreatePostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95443F7716A27459003568A0 /* TCCreatePostController.m */; };
 		95443F7A16A27459003568A0 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 95443F7916A27459003568A0 /* first.png */; };
 		95443F7C16A27459003568A0 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95443F7B16A27459003568A0 /* first@2x.png */; };
-		95443F7F16A27459003568A0 /* TCSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95443F7E16A27459003568A0 /* TCSecondViewController.m */; };
+		95443F7F16A27459003568A0 /* TCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95443F7E16A27459003568A0 /* TCLoginViewController.m */; };
 		95443F8116A27459003568A0 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 95443F8016A27459003568A0 /* second.png */; };
 		95443F8316A27459003568A0 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95443F8216A27459003568A0 /* second@2x.png */; };
 		95443F8B16A27459003568A0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95443F8A16A27459003568A0 /* SenTestingKit.framework */; };
@@ -30,6 +30,10 @@
 		95443F9516A27459003568A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95443F9316A27459003568A0 /* InfoPlist.strings */; };
 		95443F9816A27459003568A0 /* TheCavinsDeuxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95443F9716A27459003568A0 /* TheCavinsDeuxTests.m */; };
 		9576829516A33BCE00975BB0 /* RCConnectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9576829416A33BCE00975BB0 /* RCConnectionHandler.m */; };
+		95AC2BA116A671D000B6406C /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95AC2BA016A671D000B6406C /* background.jpg */; };
+		95AC2BA316A6793400B6406C /* add_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 95AC2BA216A6793400B6406C /* add_image.png */; };
+		95AC2BA516A67CB200B6406C /* background_blurred.png in Resources */ = {isa = PBXBuildFile; fileRef = 95AC2BA416A67CB200B6406C /* background_blurred.png */; };
+		95AC2BA816A67E1200B6406C /* TCStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AC2BA716A67E1200B6406C /* TCStreamViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,12 +62,12 @@
 		95443F6E16A27459003568A0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		95443F7116A27459003568A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		95443F7416A27459003568A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		95443F7616A27459003568A0 /* TCFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCFirstViewController.h; sourceTree = "<group>"; };
-		95443F7716A27459003568A0 /* TCFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCFirstViewController.m; sourceTree = "<group>"; };
+		95443F7616A27459003568A0 /* TCCreatePostController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCCreatePostController.h; sourceTree = "<group>"; };
+		95443F7716A27459003568A0 /* TCCreatePostController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCCreatePostController.m; sourceTree = "<group>"; };
 		95443F7916A27459003568A0 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		95443F7B16A27459003568A0 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		95443F7D16A27459003568A0 /* TCSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCSecondViewController.h; sourceTree = "<group>"; };
-		95443F7E16A27459003568A0 /* TCSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCSecondViewController.m; sourceTree = "<group>"; };
+		95443F7D16A27459003568A0 /* TCLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCLoginViewController.h; sourceTree = "<group>"; };
+		95443F7E16A27459003568A0 /* TCLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCLoginViewController.m; sourceTree = "<group>"; };
 		95443F8016A27459003568A0 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		95443F8216A27459003568A0 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		95443F8916A27459003568A0 /* TheCavinsDeuxTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheCavinsDeuxTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +78,11 @@
 		95443F9716A27459003568A0 /* TheCavinsDeuxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheCavinsDeuxTests.m; sourceTree = "<group>"; };
 		9576829316A33BCE00975BB0 /* RCConnectionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConnectionHandler.h; sourceTree = "<group>"; };
 		9576829416A33BCE00975BB0 /* RCConnectionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCConnectionHandler.m; sourceTree = "<group>"; };
+		95AC2BA016A671D000B6406C /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		95AC2BA216A6793400B6406C /* add_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_image.png; sourceTree = "<group>"; };
+		95AC2BA416A67CB200B6406C /* background_blurred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_blurred.png; sourceTree = "<group>"; };
+		95AC2BA616A67E1200B6406C /* TCStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCStreamViewController.h; sourceTree = "<group>"; };
+		95AC2BA716A67E1200B6406C /* TCStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCStreamViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,20 +142,25 @@
 		95443F5E16A27459003568A0 /* TheCavinsDeux */ = {
 			isa = PBXGroup;
 			children = (
+				95443F7016A27459003568A0 /* MainStoryboard_iPhone.storyboard */,
+				95443F7316A27459003568A0 /* MainStoryboard_iPad.storyboard */,
 				95443F6716A27459003568A0 /* TCAppDelegate.h */,
 				95443F6816A27459003568A0 /* TCAppDelegate.m */,
 				9576829316A33BCE00975BB0 /* RCConnectionHandler.h */,
 				9576829416A33BCE00975BB0 /* RCConnectionHandler.m */,
-				95443F7016A27459003568A0 /* MainStoryboard_iPhone.storyboard */,
-				95443F7316A27459003568A0 /* MainStoryboard_iPad.storyboard */,
-				95443F7616A27459003568A0 /* TCFirstViewController.h */,
-				95443F7716A27459003568A0 /* TCFirstViewController.m */,
+				95443F7616A27459003568A0 /* TCCreatePostController.h */,
+				95443F7716A27459003568A0 /* TCCreatePostController.m */,
+				95AC2BA616A67E1200B6406C /* TCStreamViewController.h */,
+				95AC2BA716A67E1200B6406C /* TCStreamViewController.m */,
 				95443F7916A27459003568A0 /* first.png */,
 				95443F7B16A27459003568A0 /* first@2x.png */,
-				95443F7D16A27459003568A0 /* TCSecondViewController.h */,
-				95443F7E16A27459003568A0 /* TCSecondViewController.m */,
+				95443F7D16A27459003568A0 /* TCLoginViewController.h */,
+				95443F7E16A27459003568A0 /* TCLoginViewController.m */,
 				95443F8016A27459003568A0 /* second.png */,
 				95443F8216A27459003568A0 /* second@2x.png */,
+				95AC2BA016A671D000B6406C /* background.jpg */,
+				95AC2BA216A6793400B6406C /* add_image.png */,
+				95AC2BA416A67CB200B6406C /* background_blurred.png */,
 				95443F5F16A27459003568A0 /* Supporting Files */,
 			);
 			path = TheCavinsDeux;
@@ -267,6 +281,9 @@
 				95443F7C16A27459003568A0 /* first@2x.png in Resources */,
 				95443F8116A27459003568A0 /* second.png in Resources */,
 				95443F8316A27459003568A0 /* second@2x.png in Resources */,
+				95AC2BA116A671D000B6406C /* background.jpg in Resources */,
+				95AC2BA316A6793400B6406C /* add_image.png in Resources */,
+				95AC2BA516A67CB200B6406C /* background_blurred.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,9 +320,10 @@
 			files = (
 				95443F6516A27459003568A0 /* main.m in Sources */,
 				95443F6916A27459003568A0 /* TCAppDelegate.m in Sources */,
-				95443F7816A27459003568A0 /* TCFirstViewController.m in Sources */,
-				95443F7F16A27459003568A0 /* TCSecondViewController.m in Sources */,
+				95443F7816A27459003568A0 /* TCCreatePostController.m in Sources */,
+				95443F7F16A27459003568A0 /* TCLoginViewController.m in Sources */,
 				9576829516A33BCE00975BB0 /* RCConnectionHandler.m in Sources */,
+				95AC2BA816A67E1200B6406C /* TCStreamViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
