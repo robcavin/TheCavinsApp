@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define API_DOMAIN @"http://10.0.0.10:8080/"
+#define API_DOMAIN @"http://thecavins.com/"
 
 @interface RCConnectionHandler : NSObject 
 
@@ -18,13 +18,17 @@
                     withArgs:(NSDictionary*)args
                    withFiles:(NSArray*)files
                    withOwner:(id)owner
-                    callback:(void(^)(NSHTTPURLResponse* response, NSData* data))callback;
+        withProgressCallback:(void(^)(float completionPercentage))progressCallback
+      withCompletionCallback:(void(^)(NSHTTPURLResponse* response, NSData* data))callback;
 
 + (BOOL) requestJSONWithEndpoint:(NSString*)endpoint
                       withMethod:(NSString*)method
                         withArgs:(NSDictionary*)args
                        withFiles:(NSArray*)files
                        withOwner:(id)owner
-                        callback:(void(^)(NSHTTPURLResponse* response, id json))callback;
+            withProgressCallback:(void(^)(float completionPercentage))progressCallback
+          withCompletionCallback:(void(^)(NSHTTPURLResponse* response, id json))callback;
+
++ (void) cancelAllRequestsOwnedBy:(id)owner;
 
 @end

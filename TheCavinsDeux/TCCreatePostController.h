@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet UITextView* textView;
 @property (weak, nonatomic) IBOutlet UIImageView *addImageView;
 @property (weak, nonatomic) IBOutlet UIButton *postButton;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 - (IBAction)pushedImageButton:(id)sender;
 - (IBAction)pushedPostButton:(id)sender;

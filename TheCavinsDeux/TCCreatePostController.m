@@ -55,8 +55,8 @@
     if (buttonIndex == [actionSheet cancelButtonIndex]) return;
     
     switch (buttonIndex) {
-        case 1: _imageSource = UIImagePickerControllerSourceTypePhotoLibrary; break;
-        case 2: _imageSource = UIImagePickerControllerSourceTypeCamera; break;
+        case 0: _imageSource = UIImagePickerControllerSourceTypePhotoLibrary; break;
+        case 1: _imageSource = UIImagePickerControllerSourceTypeCamera; break;
     }
     [self performSegueWithIdentifier:@"openPicker" sender:self];
 }
@@ -65,7 +65,7 @@
     if ([segue.identifier isEqualToString:@"openPicker"]) {
         UIImagePickerController* controller = (UIImagePickerController*) segue.destinationViewController;
         controller.delegate = self;
-        controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        controller.sourceType = _imageSource;
         controller.allowsEditing = YES;
     }
 }
@@ -118,15 +118,20 @@
                                         withArgs:args
                                        withFiles:fileInfo
                                        withOwner:self
-                                        callback:^(NSHTTPURLResponse *response, id json) {
-                                            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Post Successful"
-                                                                                                message:nil
-                                                                                               delegate:nil
-                                                                                      cancelButtonTitle:@"OK"
-                                                                                      otherButtonTitles:nil];
-                                            [alertView show];
-                                            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-                                        }];
+                            withProgressCallback:^(float completionPercentage) {
+                                self.postButton.hidden = YES;
+                                self.progressView.hidden = NO;
+                                self.progressView.progress = completionPercentage;
+                            }
+                          withCompletionCallback:^(NSHTTPURLResponse *response, id json) {
+                              UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Post Successful"
+                                                                                  message:nil
+                                                                                 delegate:nil
+                                                                        cancelButtonTitle:@"OK"
+                                                                        otherButtonTitles:nil];
+                              [alertView show];
+                              [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                          }];
     
 }
 

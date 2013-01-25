@@ -45,11 +45,13 @@
                                         withArgs:nil
                                        withFiles:nil
                                        withOwner:self
-                                        callback:^(NSHTTPURLResponse *response, NSDictionary* json) {
-                                            if ([json objectForKey:@"login_required"]) {
-                                                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"login_required" object:nil]];
-                                            }
-                                        }];
+                            withProgressCallback:nil
+                          withCompletionCallback:^(NSHTTPURLResponse *response, NSDictionary* json) {
+                              if ([json objectForKey:@"login_required"]) {
+                                  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"login_required" object:nil]];
+                              }
+                          }
+     ];
     
 
 }

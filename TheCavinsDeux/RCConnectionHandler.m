@@ -15,7 +15,8 @@
 
 @property (nonatomic, strong) NSHTTPURLResponse* response;
 @property (nonatomic, strong) NSMutableData* data;
-@property (nonatomic, copy)   void(^callback)(NSURLConnection* connection, NSHTTPURLResponse* response, NSData* ret, NSError* err);
+@property (nonatomic, copy)   void(^completionCallback)(NSURLConnection* connection, NSHTTPURLResponse* response, NSData* ret, NSError* err);
+@property (nonatomic, copy)   void(^progressCallback)(NSURLConnection* connection, NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpected);
 
 @end
 
@@ -36,11 +37,18 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    self.callback(connection,self.response, self.data, error);
+    if (self.completionCallback)
+        self.completionCallback(connection,self.response, self.data, error);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    self.callback(connection,self.response, self.data, nil);
+    if (self.completionCallback)
+        self.completionCallback(connection,self.response, self.data, nil);
+}
+
+- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
+    if (self.progressCallback)
+        self.progressCallback(connection,bytesWritten,totalBytesWritten,totalBytesExpectedToWrite);
 }
 
 @end
@@ -133,7 +141,8 @@ static NSMutableDictionary* requests;
                     withArgs:(NSDictionary*)args
                    withFiles:(NSArray*)files
                    withOwner:(id)owner
-                    callback:(void(^)(NSHTTPURLResponse* response, NSData* data))callback {
+        withProgressCallback:(void(^)(float completionPercentage))progressCallback
+      withCompletionCallback:(void(^)(NSHTTPURLResponse* response, NSData* data))completionCallback {
     
     NSString *urlString = [API_DOMAIN stringByAppendingString:endpoint];
     
@@ -192,7 +201,13 @@ static NSMutableDictionary* requests;
     // Set up return handler
     RCConnectionDataHandler* dataHandler = [[RCConnectionDataHandler alloc] init];
     
-    dataHandler.callback = ^(NSURLConnection* connection, NSHTTPURLResponse* response, NSData* data, NSError* error) {
+    // Create the progress handler, useful for displaying upload progress
+    dataHandler.progressCallback = ^(NSURLConnection* connection, NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpected) {
+        if (progressCallback) progressCallback((float) totalBytesWritten / totalBytesExpected);
+    };
+
+    // Create the completion handler
+    dataHandler.completionCallback = ^(NSURLConnection* connection, NSHTTPURLResponse* response, NSData* data, NSError* error) {
         [requests removeObjectForKey:[NSNumber numberWithInt:[connection hash]]];
         if (error) {
             UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Network Error"
@@ -203,10 +218,10 @@ static NSMutableDictionary* requests;
             [alertView show];
         }
         else {
-            if (callback) callback(response,data);
+            if (completionCallback) completionCallback(response,data);
         }
     };
-    
+
     // Now create the connection and kick it off
     NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:dataHandler startImmediately:YES];
     
@@ -217,40 +232,50 @@ static NSMutableDictionary* requests;
 }
 
 
+
 + (BOOL) requestJSONWithEndpoint:(NSString*)endpoint
                       withMethod:(NSString*)method
                         withArgs:(NSDictionary*)args
                        withFiles:(NSArray*)files
                        withOwner:(id)owner
-                        callback:(void(^)(NSHTTPURLResponse* response, id json))callback {
-    
+            withProgressCallback:(void(^)(float completionPercentage))progressCallback
+          withCompletionCallback:(void(^)(NSHTTPURLResponse* response, id json))completionCallback {
+
     [self requestWithEndpoint:endpoint
                    withMethod:method
                    andHeaders:@{@"Accept":@"application/json"}
                      withArgs:args
                     withFiles:files
                     withOwner:owner
-                     callback:^(NSHTTPURLResponse *response, NSData *data) {
-                         NSError* error = nil;
-                         id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                         
-                         // Error parsing JSON
-                         if (error) {
-                             NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                             UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Response Error"
-                                                                                 message:[error localizedDescription]
-                                                                                delegate:nil
-                                                                       cancelButtonTitle:@"OK"
-                                                                       otherButtonTitles:nil];
-                             [alertView show];
-                             
-                         }
-                         
-                         // Success
-                         else {
-                             if (callback) callback(response,result);
-                         }
-                     }];
+     
+         withProgressCallback:^(float completionPercentage) {
+             if (progressCallback) progressCallback(completionPercentage);
+         }
+
+       withCompletionCallback:^(NSHTTPURLResponse *response, NSData *data) {
+           
+           NSError* error = nil;
+           id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+           
+           // Error parsing JSON
+           if (error) {
+               NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+               UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Response Error"
+                                                                   message:[error localizedDescription]
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+               [alertView show];
+               
+           }
+           
+           // Success
+           else {
+               if (completionCallback) completionCallback(response,result);
+           }
+       }
+     
+     ];
     return YES;
 }
 

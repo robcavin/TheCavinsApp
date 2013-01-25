@@ -81,11 +81,11 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="add_image.png" translatesAutoresizingMaskIntoConstraints="NO" id="NgU-Ue-Knw">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="301" id="GjV-yi-jRT"/>
-                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6t7-7D-xt3">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="301" id="YAS-Ap-v5c"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -130,29 +130,33 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gCA-R9-Cf9"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ssu-xK-p6h" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="7NC-Uq-676"/>
                             <constraint firstItem="Qkg-GZ-YFt" firstAttribute="top" secondItem="16" secondAttribute="top" constant="88" id="DjV-iF-iTO"/>
+                            <constraint firstItem="6t7-7D-xt3" firstAttribute="trailing" secondItem="gCA-R9-Cf9" secondAttribute="trailing" type="default" id="ECc-Pg-EkZ"/>
                             <constraint firstItem="9Np-de-0Ag" firstAttribute="trailing" secondItem="Qkg-GZ-YFt" secondAttribute="trailing" type="default" id="GVN-qt-O6F"/>
                             <constraint firstItem="pRK-L0-J2b" firstAttribute="top" secondItem="16" secondAttribute="top" constant="16" id="JMw-Kl-rwh"/>
+                            <constraint firstItem="JNr-nJ-qaw" firstAttribute="trailing" secondItem="gCA-R9-Cf9" secondAttribute="trailing" type="default" id="L5Q-Ok-9kx"/>
+                            <constraint firstItem="gCA-R9-Cf9" firstAttribute="centerY" secondItem="JNr-nJ-qaw" secondAttribute="centerY" type="default" id="LML-t4-r0t"/>
+                            <constraint firstItem="gCA-R9-Cf9" firstAttribute="leading" secondItem="JNr-nJ-qaw" secondAttribute="leading" type="default" id="M3B-5U-MbR"/>
                             <constraint firstItem="pRK-L0-J2b" firstAttribute="leading" secondItem="Qkg-GZ-YFt" secondAttribute="leading" type="default" id="MLZ-OS-Xh4"/>
-                            <constraint firstItem="JNr-nJ-qaw" firstAttribute="trailing" secondItem="6t7-7D-xt3" secondAttribute="trailing" type="default" id="MdE-gA-HbL"/>
-                            <constraint firstItem="NgU-Ue-Knw" firstAttribute="leading" secondItem="JNr-nJ-qaw" secondAttribute="leading" type="default" id="PBm-Un-DYp"/>
                             <constraint firstItem="Ssu-xK-p6h" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="PbM-0H-vsN"/>
                             <constraint firstItem="Ssu-xK-p6h" firstAttribute="top" secondItem="16" secondAttribute="top" type="default" id="SWf-TN-py1"/>
                             <constraint firstItem="Qkg-GZ-YFt" firstAttribute="leading" secondItem="NgU-Ue-Knw" secondAttribute="leading" type="default" id="U2L-nE-aJ3"/>
-                            <constraint firstItem="Ssu-xK-p6h" firstAttribute="centerX" secondItem="6t7-7D-xt3" secondAttribute="centerX" type="default" id="VKw-5g-ytU"/>
                             <constraint firstItem="9Np-de-0Ag" firstAttribute="top" secondItem="16" secondAttribute="top" constant="26" id="Vrt-cE-HRt"/>
                             <constraint firstAttribute="bottom" secondItem="JNr-nJ-qaw" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="ced-jV-off"/>
                             <constraint firstItem="6t7-7D-xt3" firstAttribute="leading" secondItem="NgU-Ue-Knw" secondAttribute="leading" type="default" id="cxS-sG-3N2"/>
                             <constraint firstItem="6t7-7D-xt3" firstAttribute="bottom" secondItem="NgU-Ue-Knw" secondAttribute="bottom" type="default" id="ii0-AN-lm7"/>
                             <constraint firstItem="6t7-7D-xt3" firstAttribute="trailing" secondItem="Qkg-GZ-YFt" secondAttribute="trailing" type="default" id="isq-bS-y2d"/>
+                            <constraint firstItem="JNr-nJ-qaw" firstAttribute="centerX" secondItem="Ssu-xK-p6h" secondAttribute="centerX" type="default" id="l44-ef-Ql2"/>
                             <constraint firstItem="6t7-7D-xt3" firstAttribute="top" secondItem="Qkg-GZ-YFt" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="luz-Lg-Abw"/>
                             <constraint firstItem="Ssu-xK-p6h" firstAttribute="bottom" secondItem="16" secondAttribute="bottom" type="default" id="nso-5U-TNd"/>
                             <constraint firstItem="9Np-de-0Ag" firstAttribute="baseline" secondItem="pRK-L0-J2b" secondAttribute="baseline" type="default" id="wqr-3I-yL3"/>
                             <constraint firstItem="NgU-Ue-Knw" firstAttribute="top" secondItem="Qkg-GZ-YFt" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="wvO-rP-BdI"/>
+                            <constraint firstItem="gCA-R9-Cf9" firstAttribute="leading" secondItem="6t7-7D-xt3" secondAttribute="leading" type="default" id="z8e-Us-dgd"/>
                             <constraint firstItem="6t7-7D-xt3" firstAttribute="trailing" secondItem="NgU-Ue-Knw" secondAttribute="trailing" type="default" id="zhn-AL-GCQ"/>
                         </constraints>
                     </view>
@@ -160,6 +164,7 @@
                         <outlet property="addImageView" destination="NgU-Ue-Knw" id="yYn-yz-kBg"/>
                         <outlet property="imageView" destination="NgU-Ue-Knw" id="Mbu-XU-SNB"/>
                         <outlet property="postButton" destination="JNr-nJ-qaw" id="axm-6U-cHR"/>
+                        <outlet property="progressView" destination="gCA-R9-Cf9" id="xPJ-RE-HLM"/>
                         <outlet property="textView" destination="Qkg-GZ-YFt" id="Mhw-7p-kvU"/>
                         <segue destination="8C2-hI-FSh" kind="modal" identifier="openPicker" id="mrs-Ex-Yic"/>
                     </connections>
@@ -262,38 +267,6 @@
         <image name="background.jpg" width="1200" height="1600"/>
         <image name="background_blurred.png" width="1200" height="1600"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="TCCreatePostController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TCCreatePostController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelButtonPressed:"/>
-                <relationship kind="action" name="pushedImageButton:"/>
-                <relationship kind="action" name="pushedPostButton:"/>
-                <relationship kind="outlet" name="addImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="postButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="TCLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TCLoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pushedLoginButton:"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="TCStreamViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TCStreamViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

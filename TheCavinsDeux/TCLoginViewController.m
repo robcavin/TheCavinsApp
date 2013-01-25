@@ -30,25 +30,29 @@
     
     [RCConnectionHandler requestJSONWithEndpoint:@"login"
                                       withMethod:@"POST"
-                                        withArgs:@{@"username":@"robcavin",@"password":@"nirvanastp"}
+                                        withArgs:@{ @"username":self.usernameTextField.text,
+                                                    @"password":self.passwordTextField.text}
                                        withFiles:nil
                                        withOwner:self
-                                        callback:^(NSHTTPURLResponse *response, NSDictionary* json) {
-                                            if ([json objectForKey:@"login_required"]) {
-                                                UIAlertView* alertView =
-                                                [[UIAlertView alloc] initWithTitle:@"Login Error"
-                                                                           message:@"Login failed"
-                                                                          delegate:nil
-                                                                 cancelButtonTitle:@"OK"
-                                                                 otherButtonTitles:nil];
-                                                [alertView show];
-                                                
-                                            }
-                                            else {
-                                                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"user_logged_in"];
-                                                [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-                                            }
-                                        }];
+                            withProgressCallback:nil     
+                          withCompletionCallback:^(NSHTTPURLResponse *response, NSDictionary* json) {
+
+                              if ([json objectForKey:@"login_required"]) {
+                                  UIAlertView* alertView =
+                                  [[UIAlertView alloc] initWithTitle:@"Login Error"
+                                                             message:@"Login failed"
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil];
+                                  [alertView show];
+                                  
+                              }
+                              else {
+                                  [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"user_logged_in"];
+                                  [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                              }
+                          }
+     ];
     
     
 }
