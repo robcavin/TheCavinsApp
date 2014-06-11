@@ -14,6 +14,7 @@
     UIImagePickerControllerSourceType _imageSource;
     BOOL _postEdited;
     BOOL _imageAdded;
+    BOOL _placeholderTextCleared;
 }
 
 @end
@@ -43,6 +44,8 @@
 
 
 - (IBAction)pushedImageButton:(id)sender {
+    [self.textView resignFirstResponder];
+    
     UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Source"
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
@@ -55,19 +58,21 @@
     if (buttonIndex == [actionSheet cancelButtonIndex]) return;
     
     switch (buttonIndex) {
-        case 0: _imageSource = UIImagePickerControllerSourceTypePhotoLibrary; break;
+        case 0: _imageSource = UIImagePickerControllerSourceTypeSavedPhotosAlbum; break;
         case 1: _imageSource = UIImagePickerControllerSourceTypeCamera; break;
     }
-    [self performSegueWithIdentifier:@"openPicker" sender:self];
+/*    [self performSegueWithIdentifier:@"openPicker" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"openPicker"]) {
         UIImagePickerController* controller = (UIImagePickerController*) segue.destinationViewController;
-        controller.delegate = self;
-        controller.sourceType = _imageSource;
-        controller.allowsEditing = YES;
-    }
+ */
+    UIImagePickerController* controller = [[UIImagePickerController alloc] init];
+    controller.delegate = self;
+    controller.sourceType = _imageSource;
+    controller.allowsEditing = YES;
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -79,8 +84,11 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    self.textView.text = @"";
-    self.textView.textColor = [UIColor darkTextColor];    
+    if (!_placeholderTextCleared) {
+        textView.text = @"";
+        _placeholderTextCleared = YES;
+    }
+    self.textView.textColor = [UIColor darkTextColor];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

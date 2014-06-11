@@ -27,7 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.webView.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor clearColor];
+    self.webView.backgroundColor = [UIColor clearColor];
+    self.webView.scrollView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login) name:@"login_required" object:nil];
 	// Do any additional setup after loading the view.
 }
